@@ -8,11 +8,6 @@ on:
       branches:
       - main     
   workflow_dispatch: 
-    inputs:
-      run_packer:
-        type: boolean
-        description: Run Packer to build image
-        default: true
 
 jobs:
   Ubuntu_2204:
@@ -23,5 +18,5 @@ jobs:
       image_readme_path: 'ubuntu/Ubuntu2204-Readme.md'
       short_image_name: 'u'
       state: tf-ubuntu-2204.tfstate
-      run_packer: ${{ inputs.run_packer }}
+      run_id: ${{ vars.GITHUB_RUN_ID }}
     secrets: inherit

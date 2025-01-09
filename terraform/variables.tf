@@ -42,10 +42,9 @@ variable "os_type_map" {
   }
 }
 
-variable "run_packer" {
+variable "run_id" {
   description = "Run packer flag"
-  type = bool
-  default = false
+  type = string
 }
 
 variable "subscription-id" {
