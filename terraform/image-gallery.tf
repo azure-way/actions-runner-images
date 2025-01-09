@@ -37,6 +37,7 @@ data "azurerm_shared_image" "image" {
 resource "null_resource" "packer_init" {
   triggers = {
     dir_sha1 = sha1(join("", [for f in fileset("${path.cwd}/../images/${var.image_type}", "**") : filesha1("${path.cwd}/../images/${var.image_type}/${f}")]))
+    run_id   = var.run_id
   }
 
   provisioner "local-exec" {
@@ -50,6 +51,7 @@ resource "null_resource" "packer_init" {
 resource "null_resource" "packer_runner" {
   triggers = {
     dir_sha1 = sha1(join("", [for f in fileset("${path.cwd}/../images/${var.image_type}", "**") : filesha1("${path.cwd}/../images/${var.image_type}/${f}")]))
+    run_id   = var.run_id
   }
 
   provisioner "local-exec" {
