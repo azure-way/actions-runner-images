@@ -18,5 +18,5 @@ jobs:
       image_readme_path: 'ubuntu/Ubuntu2004-Readme.md'
       short_image_name: 'u'
       state: tf-ubuntu-2004.tfstate
-      run_id: ${{ vars.GITHUB_RUN_ID }}
+      run_id: ${{ github.run_id }}
     secrets: inherit
