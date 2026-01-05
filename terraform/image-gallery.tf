@@ -43,8 +43,9 @@ resource "null_resource" "packer_init" {
 
   provisioner "local-exec" {
     interpreter = ["/bin/sh", "-c"]
+    working_dir = local.image_template_dir
     command     = <<EOT
-      packer init ${local.image_template_dir}
+      packer init .
     EOT
     }
   }
