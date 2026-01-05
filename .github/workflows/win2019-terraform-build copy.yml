@@ -1,0 +1,22 @@
+name: Windows 2025 by Terraform
+run-name: Windows2025
+
+on:
+  push:
+      paths:
+      - 'images/windows/**'
+      branches:
+      - main     
+  workflow_dispatch: 
+
+jobs:
+  win2019:
+    uses: ./.github/workflows/terraform-execution.yml
+    with:
+      image_type: 'windows'
+      image_type_version: '2025'
+      image_readme_path: 'windows/Windows2025-Readme.md'
+      short_image_name: 'w'
+      state: tf-windows-2025.tfstate
+      run_id: ${{ github.run_id }}
+    secrets: inherit
