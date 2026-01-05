@@ -1,7 +1,6 @@
 locals {
-  prefix            = "community-gallery"
-  image_template_dir = "../images/${var.image_type}/templates"
-  imagePath         = "build.${var.image_type}-${var.image_type_version}.pkr.hcl"
+  prefix             = "community-gallery"
+  image_template_dir = "${path.module}/../images/${var.image_type}/templates"
 }
 
 data "azurerm_client_config" "current" {}
@@ -45,7 +44,7 @@ resource "null_resource" "packer_init" {
     interpreter = ["/bin/sh", "-c"]
     working_dir = local.image_template_dir
     command     = <<EOT
-      packer init ${local.imagePath}
+      packer init ${local.image_template_dir}
     EOT
     }
   }
@@ -73,7 +72,7 @@ resource "null_resource" "packer_runner" {
              -var "managed_image_name=${var.image_version}-${data.azurerm_shared_image.image.name}" \
              -var "managed_image_resource_group_name=${data.azurerm_resource_group.automation_resource_group.name}" \
              -color=false \
-             "${local.imagePath}" 
+             "${local.image_template_dir}"
     EOT
 
     environment = {
