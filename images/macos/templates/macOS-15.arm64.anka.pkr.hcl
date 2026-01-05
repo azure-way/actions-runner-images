@@ -176,6 +176,7 @@ build {
     execute_command  = "chmod +x {{ .Path }}; source $HOME/.bash_profile; sudo {{ .Vars }} {{ .Path }}"
     scripts          = [
       "${path.root}/../scripts/build/configure-tccdb-macos.sh",
+      "${path.root}/../scripts/build/configure-autologin.sh",
       "${path.root}/../scripts/build/configure-auto-updates.sh",
       "${path.root}/../scripts/build/configure-ntpconf.sh",
       "${path.root}/../scripts/build/configure-shell.sh"
@@ -241,10 +242,13 @@ build {
       "${path.root}/../scripts/build/install-gcc.sh",
       "${path.root}/../scripts/build/install-cocoapods.sh",
       "${path.root}/../scripts/build/install-android-sdk.sh",
+      "${path.root}/../scripts/build/install-vcpkg.sh",
       "${path.root}/../scripts/build/install-safari.sh",
       "${path.root}/../scripts/build/install-chrome.sh",
+      "${path.root}/../scripts/build/install-firefox.sh",
       "${path.root}/../scripts/build/install-bicep.sh",
-      "${path.root}/../scripts/build/install-codeql-bundle.sh"
+      "${path.root}/../scripts/build/install-codeql-bundle.sh",
+      "${path.root}/../scripts/build/install-edge.sh"
     ]
   }
 
@@ -267,19 +271,28 @@ build {
     environment_vars = ["IMAGE_FOLDER=${local.image_folder}"]
     execute_command  = "source $HOME/.bash_profile; {{ .Vars }} {{ .Path }}"
     inline           = [
-      "pwsh -File \"${local.image_folder}/software-report/Generate-SoftwareReport.ps1\" -OutputDirectory \"${local.image_folder}/output/software-report\" -ImageName ${var.build_id}",
+      "pwsh -File \"${local.image_folder}/software-report/Generate-SoftwareReport.ps1\" -OutputDirectory \"${local.image_folder}/output\" -ImageName ${var.build_id}",
       "pwsh -File \"${local.image_folder}/tests/RunAll-Tests.ps1\""
     ]
   }
 
   provisioner "file" {
-    destination = "${path.root}/../../image-output/"
+    destination = "${path.root}/../../image-output/macos-15-arm64-Readme.md"
     direction   = "download"
-    source      = "${local.image_folder}/output/"
+    source      = "${local.image_folder}/output/software-report.md"
+  }
+
+  provisioner "file" {
+    destination = "${path.root}/../../image-output/software-report.json"
+    direction   = "download"
+    source      = "${local.image_folder}/output/software-report.json"
   }
 
   provisioner "shell" {
     execute_command = "chmod +x {{ .Path }}; source $HOME/.bash_profile; {{ .Vars }} {{ .Path }}"
-    scripts         = ["${path.root}/../scripts/build/configure-hostname.sh"]
+    scripts         = [
+      "${path.root}/../scripts/build/configure-hostname.sh",
+      "${path.root}/../scripts/build/configure-system.sh"
+    ]
   }
 }

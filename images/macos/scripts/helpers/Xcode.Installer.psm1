@@ -42,46 +42,6 @@ function Invoke-DownloadXcodeArchive {
     return $tempXipDirectory
 }
 
-function Resolve-ExactXcodeVersion {
-    param (
-        [Parameter(Mandatory)]
-        [string] $Version
-    )
-
-    # if toolset string contains spaces, consider it as a full name of Xcode
-    if ($Version -match "\s") {
-        return $Version
-    }
-
-    $semverVersion = [SemVer]::Parse($Version)
-    $availableVersions = Get-AvailableXcodeVersions
-    $satisfiedVersions = $availableVersions | Where-Object { $semverVersion -eq $_.stableSemver }
-
-    return $satisfiedVersions | Select-Object -Last 1 -ExpandProperty rawVersion
-}
-
-function Get-AvailableXcodeVersions {
-    $rawVersionsList = Invoke-XCVersion -Arguments "list" | ForEach-Object { $_.Trim() } | Where-Object { $_ -match "^\d" }
-    $availableVersions = $rawVersionsList | ForEach-Object {
-        $partStable,$partMajor = $_.Split(" ", 2)
-        $semver = $stableSemver = [SemVer]::Parse($partStable)
-
-        if ($partMajor) {
-            # Convert 'beta 3' -> 'beta.3', 'Release Candidate' -> 'releasecandidate', 'GM Seed 2' -> 'gmseed.2'
-            $normalizedLabel = $partMajor.toLower() -replace " (\d)", '.$1' -replace " ([a-z])", '$1'
-            $semver = [SemVer]::new($stableSemver.Major, $stableSemver.Minor, $stableSemver.Patch, $normalizedLabel)
-        }
-
-        return [PSCustomObject]@{
-            semver = $semver
-            rawVersion = $_
-            stableSemver = $stableSemver
-        }
-    }
-
-    return $availableVersions | Sort-Object -Property semver
-}
-
 function Expand-XcodeXipArchive {
     param (
         [Parameter(Mandatory)]
@@ -145,18 +105,16 @@ function Approve-XcodeLicense {
     }
 }
 
-function Install-XcodeAdditionalPackages {
+function Install-XcodeAdditionalComponents {
     param (
         [Parameter(Mandatory)]
         [string] $Version
     )
 
-    Write-Host "Installing additional packages for Xcode $Version..."
+    Write-Host "Installing additional MetalToolchain component for Xcode $Version..."
     $xcodeRootPath = Get-XcodeRootPath -Version $Version
-    $packages = Get-ChildItem -Path "$xcodeRootPath/Contents/Resources/Packages" -Filter "*.pkg" -File
-    $packages | ForEach-Object {
-        Invoke-ValidateCommand "sudo installer -pkg $($_.FullName) -target / -allowUntrusted"
-    }
+    $xcodeBuildPath = Get-XcodeToolPath -XcodeRootPath $xcodeRootPath -ToolName "xcodebuild"
+    Invoke-ValidateCommand "$xcodeBuildPath -downloadComponent MetalToolchain" | Out-Null
 }
 
 function Invoke-XcodeRunFirstLaunch {
@@ -165,24 +123,95 @@ function Invoke-XcodeRunFirstLaunch {
         [string] $Version
     )
 
-    if ($Version.StartsWith("8") -or $Version.StartsWith("9")) {
-        return
-    }
-
     Write-Host "Running 'runFirstLaunch' for Xcode $Version..."
     $xcodeRootPath = Get-XcodeToolPath -Version $Version -ToolName "xcodebuild"
     Invoke-ValidateCommand "sudo $xcodeRootPath -runFirstLaunch"
 }
 
-function Install-AdditionalSimulatorRuntimes {
+function Install-XcodeAdditionalSimulatorRuntimes {
     param (
         [Parameter(Mandatory)]
-        [string] $Version
+        [string] $Version,
+        [Parameter(Mandatory)]
+        [string] $Arch,
+        [Parameter(Mandatory)]
+        [object] $Runtimes
     )
 
     Write-Host "Installing Simulator Runtimes for Xcode $Version ..."
-    $xcodebuildPath = Get-XcodeToolPath -Version $Version -ToolName "xcodebuild"
-    Invoke-ValidateCommand "$xcodebuildPath -downloadAllPlatforms" | Out-Null
+    $xcodebuildPath = Get-XcodeToolPath -Version $Version -ToolName 'xcodebuild'
+    $validRuntimes = @("iOS", "watchOS", "tvOS")
+
+    # visionOS is only available on arm64
+    if ($Arch -eq "arm64") {
+        $validRuntimes += "visionOS"
+    }
+
+    # Install all runtimes / skip runtimes
+    if ($Runtimes -eq "default") {
+        Write-Host "Installing all runtimes for Xcode $Version ..."
+        Invoke-ValidateCommand "$xcodebuildPath -downloadAllPlatforms" | Out-Null
+        return
+    } elseif ($Runtimes -eq "none") {
+        Write-Host "Skipping runtimes installation for Xcode $Version ..."
+        return
+    }
+
+    # Convert $Runtimes to hashtable
+    if ($Runtimes -is [System.Object[]]) {
+        $convertedRuntimes = @{}
+
+        foreach ($entry in $Runtimes) {
+            if ($entry -is [PSCustomObject]) {
+                $entry = $entry | ConvertTo-Json -Compress | ConvertFrom-Json -AsHashtable
+            }
+            
+            # Copy all keys and values from the entry to the converted runtimes
+            foreach ($key in $entry.Keys) {
+                if ($convertedRuntimes.ContainsKey($key)) {
+                    $convertedRuntimes[$key] += $entry[$key]
+                } else {
+                    $convertedRuntimes[$key] = $entry[$key]
+                }
+            }
+        }
+        $Runtimes = $convertedRuntimes
+    }
+
+    # Validate runtimes format
+    if ($Runtimes -isnot [System.Collections.Hashtable]) {
+        throw "Invalid runtime format for Xcode $(Version): Expected hashtable, got [$($Runtimes.GetType())]"
+    }
+
+    # Install runtimes for specified platforms
+    foreach ($platform in $validRuntimes) {        
+        if (-not $Runtimes.ContainsKey($platform)) {
+            Write-Host "No runtimes specified for $platform in the toolset for Xcode $Version, please check the toolset."
+            return
+        }
+        foreach ($platformVersion in $Runtimes[$platform]) {
+            switch ($platformVersion) {
+                "skip" {
+                    Write-Host "Skipping $platform runtimes installation for Xcode $Version ..."
+                    continue
+                }
+                "default" {
+                    Write-Host "Installing default $platform runtime for Xcode $Version ..."
+                    Invoke-ValidateCommand "$xcodebuildPath -downloadPlatform $platform" | Out-Null
+                    continue
+                }
+                default {
+                    # Version might be a semver or a build number
+                    if (($platformVersion -match "^\d{1,2}\.\d(\.\d)?$") -or ($platformVersion -match "^[a-zA-Z0-9]{6,8}$")) {
+                        Write-Host "Installing $platform $platformVersion runtime for Xcode $Version ..."
+                        Invoke-ValidateCommand "$xcodebuildPath -downloadPlatform $platform -buildVersion $platformVersion" | Out-Null
+                        continue
+                    }
+                    throw "$platformVersion is not a valid value for $platform version. Valid values are 'latest' or 'skip' or a semver from 0.0 to 99.9.(9)."
+                }
+            }
+        }
+    }
 }
 
 function Build-XcodeSymlinks {
@@ -286,4 +315,15 @@ function Invoke-ValidateCommand {
         }
         Receive-Job -Job $job
     }
+}
+
+function Update-DyldCache {
+    param (
+        [Parameter(Mandatory)]
+        [string] $Version
+    )
+
+    Write-Host "Updating dyld shared cache for Xcode $Version ..."
+    Switch-Xcode -Version $Version
+    Invoke-ValidateCommand "xcrun simctl runtime dyld_shared_cache update --all"
 }

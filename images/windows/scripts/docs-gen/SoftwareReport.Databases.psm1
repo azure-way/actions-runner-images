@@ -21,8 +21,9 @@ function Get-PostgreSQLTable
 function Get-MongoDBTable
 {
     $name = "MongoDB"
+    $command = "mongod"
     $mongoService = Get-Service -Name $name
-    $mongoVersion = (Get-Command -Name 'mongo').Version.ToString()
+    $mongoVersion = (Get-Command -Name $command).Version.ToString()
     return [PSCustomObject]@{
         Version = $mongoVersion
         ServiceName = $name

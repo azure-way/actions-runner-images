@@ -1,7 +1,7 @@
 Describe "MongoDB" {
     Context "Version" {
         It "<ToolName>" -TestCases @(
-            @{ ToolName = "mongo" }
+            @{ ToolName = "mongos" }
             @{ ToolName = "mongod" }
         ) {
             $toolsetVersion = (Get-ToolsetContent).mongodb.version
@@ -23,6 +23,12 @@ Describe "MongoDB" {
 
         It "<Name> service is disabled" -TestCases $mongoServiceTests {
             $StartType | Should -Be "Disabled"
+        }
+    }
+
+    Context "Shell" {
+        It "mongosh" {
+            "mongosh --version" | Should -ReturnZeroExitCode
         }
     }
 }

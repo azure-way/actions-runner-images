@@ -111,7 +111,6 @@ build {
   provisioner "file" {
     destination = "${local.image_folder}/"
     sources     = [
-      "${path.root}/../assets/xamarin-selector",
       "${path.root}/../scripts/tests",
       "${path.root}/../scripts/docs-gen",
       "${path.root}/../scripts/helpers"
@@ -156,12 +155,10 @@ build {
     execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     inline          = [
       "mv ${local.image_folder}/docs-gen ${local.image_folder}/software-report",
-      "mv ${local.image_folder}/xamarin-selector ${local.image_folder}/assets",
       "mkdir ~/utils",
       "mv ${local.image_folder}/helpers/confirm-identified-developers-macos13.scpt ~/utils",
       "mv ${local.image_folder}/helpers/invoke-tests.sh ~/utils",
       "mv ${local.image_folder}/helpers/utils.sh ~/utils",
-      "mv ${local.image_folder}/helpers/xamarin-utils.sh ~/utils"
     ]
   }
 
@@ -178,6 +175,7 @@ build {
     execute_command  = "chmod +x {{ .Path }}; source $HOME/.bash_profile; sudo {{ .Vars }} {{ .Path }}"
     scripts          = [
       "${path.root}/../scripts/build/configure-tccdb-macos.sh",
+      "${path.root}/../scripts/build/configure-autologin.sh",
       "${path.root}/../scripts/build/configure-auto-updates.sh",
       "${path.root}/../scripts/build/configure-ntpconf.sh",
       "${path.root}/../scripts/build/configure-shell.sh"
@@ -216,7 +214,8 @@ build {
       "${path.root}/../scripts/build/install-rubygems.sh",
       "${path.root}/../scripts/build/install-git.sh",
       "${path.root}/../scripts/build/install-node.sh",
-      "${path.root}/../scripts/build/install-common-utils.sh"
+      "${path.root}/../scripts/build/install-common-utils.sh",
+      "${path.root}/../scripts/build/install-unxip.sh"
     ]
   }
 

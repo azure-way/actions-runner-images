@@ -1,50 +1,165 @@
 {
     "xcode": {
-        "default": "16",
+        "default": "16.4",
         "x64": {
             "versions": [
-                { "link": "16.1_beta_2", "version": "16.1.0-Beta.2+16B5014f", "symlinks": ["16.1"], "install_runtimes": "true", "sha256": "a07a709b4b196be118ff5bab7ea19a16a4ca273cad876d73dec5926c8a6da34a"},
-                { "link": "16", "version": "16.0.0+16A242d", "symlinks": ["16.0"], "install_runtimes": "true", "sha256": "4a26c3d102a55c7222fb145e0ee1503249c9c26c6e02dc64d783c8810b37b1e3"}
+                {
+                    "link": "26.1.1",
+                    "filename": "Xcode_26.1.1_Universal",
+                    "version": "26.1.1+17B100",
+                    "symlinks": ["26.1"],
+                    "sha256": "ed55d55fa28455c11a65e0809ba8fdf7d83fdeb268aabf9af7fcc1ee911543eb",
+                    "install_runtimes": "default"
+                },
+                {
+                    "link": "26.0.1",
+                    "filename": "Xcode_26.0.1_Universal",
+                    "version": "26.0.1+17A400",
+                    "symlinks": ["26.0"],
+                    "sha256": "9881c457068c86ac91e94cca2d7116dfd01cb7179c22b0863b63c7f3bb7e7695",
+                    "install_runtimes": "default"
+                },
+                {
+                    "link": "16.4",
+                    "filename": "Xcode_16.4",
+                    "version": "16.4.0+16F6",
+                    "sha256": "2dbf65ba28fb85b34e72c14c529a42d5c3189ab0f11fb29fdebd5f4ee6c87900",
+                    "install_runtimes": [
+                        { "iOS": ["18.4", "18.5", "18.6"] },
+                        { "watchOS": ["11.2", "11.4", "11.5"] },
+                        { "tvOS": ["18.2", "18.4", "18.5"] }
+                    ] 
+                },
+                {
+                    "link": "16.3",
+                    "filename": "Xcode_16.3",
+                    "version": "16.3+16E140",
+                    "sha256": "c593177b73e45f31e1cf7ced131760d8aa8e1532f5bbf8ba11a4ded01da14fbb",
+                    "install_runtimes": "none"
+                },
+                {
+                    "link": "16.2",
+                    "filename": "Xcode_16.2",
+                    "version": "16.2+16C5032a",
+                    "sha256": "0e367d06eb7c334ea143bada5e4422f56688aabff571bedf0d2ad9434b7290de",
+                    "install_runtimes": "none"
+                },
+                {
+                    "link": "16.1",
+                    "filename": "Xcode_16.1",
+                    "version": "16.1+16B40",
+                    "sha256": "8ca961d55981f983d21b99a95a6b0ac04905b837f6e11346ee86d28f12afe720",
+                    "install_runtimes": "none"
+                },
+                {
+                    "link": "16",
+                    "filename": "Xcode_16",
+                    "version": "16.0.0+16A242d",
+                    "sha256": "4a26c3d102a55c7222fb145e0ee1503249c9c26c6e02dc64d783c8810b37b1e3",
+                    "symlinks": ["16.0"],
+                    "install_runtimes": "none"
+                }
             ]
         },
         "arm64":{
             "versions": [
-                { "link": "16.1_beta_2", "version": "16.1.0-Beta.2+16B5014f", "symlinks": ["16.1"], "install_runtimes": "true", "sha256": "a07a709b4b196be118ff5bab7ea19a16a4ca273cad876d73dec5926c8a6da34a"},
-                { "link": "16", "version": "16.0.0+16A242d", "symlinks": ["16.0"], "install_runtimes": "true", "sha256": "4a26c3d102a55c7222fb145e0ee1503249c9c26c6e02dc64d783c8810b37b1e3"}
+                {
+                    "link": "26.1.1",
+                    "filename": "Xcode_26.1.1_Universal",
+                    "version": "26.1.1+17B100",
+                    "symlinks": ["26.1"],
+                    "sha256": "ed55d55fa28455c11a65e0809ba8fdf7d83fdeb268aabf9af7fcc1ee911543eb",
+                    "install_runtimes": "default"
+                },
+                {
+                    "link": "26.0.1",
+                    "filename": "Xcode_26.0.1_Universal",
+                    "version": "26.0.1+17A400",
+                    "symlinks": ["26.0"],
+                    "sha256": "9881c457068c86ac91e94cca2d7116dfd01cb7179c22b0863b63c7f3bb7e7695",
+                    "install_runtimes": "default"
+                },
+                {
+                    "link": "16.4",
+                    "filename": "Xcode_16.4",
+                    "version": "16.4.0+16F6",
+                    "sha256": "2dbf65ba28fb85b34e72c14c529a42d5c3189ab0f11fb29fdebd5f4ee6c87900",
+                    "install_runtimes": [
+                        { "iOS": ["18.4", "18.5", "18.6"] },
+                        { "watchOS": ["11.2", "11.4", "11.5"] },
+                        { "tvOS": ["18.2", "18.4", "18.5"] },
+                        { "visionOS": ["2.3", "2.4", "2.5"] }
+                    ]
+                },
+                {
+                    "link": "16.3",
+                    "filename": "Xcode_16.3",
+                    "version": "16.3+16E140",
+                    "sha256": "c593177b73e45f31e1cf7ced131760d8aa8e1532f5bbf8ba11a4ded01da14fbb",
+                    "install_runtimes": "none"
+                },
+                {
+                    "link": "16.2",
+                    "filename": "Xcode_16.2",
+                    "version": "16.2+16C5032a",
+                    "sha256": "0e367d06eb7c334ea143bada5e4422f56688aabff571bedf0d2ad9434b7290de",
+                    "install_runtimes": "none"
+                },
+                {
+                    "link": "16.1",
+                    "filename": "Xcode_16.1",
+                    "version": "16.1+16B40",
+                    "sha256": "8ca961d55981f983d21b99a95a6b0ac04905b837f6e11346ee86d28f12afe720",
+                    "install_runtimes": "none"
+                },
+                {
+                    "link": "16",
+                    "filename": "Xcode_16",
+                    "version": "16.0.0+16A242d",
+                    "sha256": "4a26c3d102a55c7222fb145e0ee1503249c9c26c6e02dc64d783c8810b37b1e3",
+                    "symlinks": ["16.0"],
+                    "install_runtimes": "none"
+                }
             ]
         }
-    },
+    },    
     "java": {
         "x64": {
             "default": "21",
-            "versions": [ "11", "17", "21"]
+            "versions": [ "11", "17", "21", "25" ]
         },
         "arm64": {
             "default": "21",
-            "versions": [ "11", "17", "21"]
+            "versions": [ "11", "17", "21", "25" ]
         }
     },
     "android": {
-        "cmdline-tools": "commandlinetools-mac-12172612_latest.zip",
+        "cmdline-tools": "commandlinetools-mac-12266719_latest.zip",
         "sdk-tools": "sdk-tools-darwin-4333796.zip",
-        "platform_min_version": "35",
-        "build_tools_min_version": "35.0.2",
+        "platform_min_version": "34",
+        "build_tools_min_version": "35.0.0",
         "extras": [
             "android;m2repository", "google;m2repository", "google;google_play_services"
         ],
         "addons": [],
         "additional_tools": [
-            "cmake;3.22.1"
+            "cmake;3.31.5",
+            "cmake;4.1.2"
         ],
         "ndk": {
             "default": "27",
             "versions": [
-                "26", "27"
+                "26", "27","28", "29"
             ]
         }
     },
     "powershellModules": [
-        { "name": "Az" },
+        {
+            "name": "Az",
+            "versions": [
+                "12.5.0"
+            ]
+        },
         { "name": "Pester" },
         { "name": "PSScriptAnalyzer" }
     ],
@@ -65,9 +180,11 @@
             "p7zip",
             "packer",
             "perl",
-            "pkg-config",
+            "pkgconf",
             "swiftformat",
+            "tcl-tk@8",
             "zstd",
+            "ninja",
             "gmp",
             "yq",
             "unxip",
@@ -75,26 +192,30 @@
             "xcodes"
         ],
         "cask_packages": [
-            ""
+            "parallels"
         ]
     },
     "gcc": {
         "versions": [
-            "12",
             "13",
-            "14"
+            "14",
+            "15"
         ]
     },
     "dotnet": {
         "arch":{
             "x64": {
-               "versions": [
-                   "8.0"
+                "versions": [
+                    "8.0",
+                    "9.0",
+                    "10.0"
                 ]
             },
             "arm64": {
                 "versions": [
-                    "8.0"
+                    "8.0",
+                    "9.0",
+                    "10.0"
                 ]
             }
         }
@@ -118,13 +239,17 @@
                         "3.9.*",
                         "3.10.*",
                         "3.11.*",
-                        "3.12.*"
+                        "3.12.*",
+                        "3.13.*",
+                        "3.14.*"
                     ]
                 },
                 "arm64": {
                     "versions": [
                         "3.11.*",
-                        "3.12.*"
+                        "3.12.*",
+                        "3.13.*",
+                        "3.14.*"
                     ]
                 }
             }
@@ -136,14 +261,16 @@
             "arch": {
                 "x64": {
                     "versions": [
-                        "18.*",
-                        "20.*"
+                        "20.*",
+                        "22.*",
+                        "24.*"
                     ]
                 },
                 "arm64": {
                     "versions": [
-                        "18.*",
-                        "20.*"
+                        "20.*",
+                        "22.*",
+                        "24.*"
                     ]
                 }
             }
@@ -156,17 +283,19 @@
                 "x64": {
                     "variable_template" : "GOROOT_{0}_{1}_X64",
                     "versions": [
-                        "1.21.*",
                         "1.22.*",
-                        "1.23.*"
+                        "1.23.*",
+                        "1.24.*",
+                        "1.25.*"
                     ]
                 },
                 "arm64": {
                     "variable_template" : "GOROOT_{0}_{1}_ARM64",
                     "versions": [
-                        "1.21.*",
                         "1.22.*",
-                        "1.23.*"
+                        "1.23.*",
+                        "1.24.*",
+                        "1.25.*"
                     ]
                 }
             }
@@ -176,8 +305,16 @@
             "arch": {
                 "x64": {
                     "versions": [
-                        "3.1.*",
-                        "3.2.*"
+                        "3.2.*",
+                        "3.3.*",
+                        "3.4.*"
+                    ]
+                },
+                "arm64": {
+                    "versions": [
+                        "3.2.*",
+                        "3.3.*",
+                        "3.4.*"
                     ]
                 }
             }
@@ -190,7 +327,7 @@
         "version": "18"
     },
     "php": {
-        "version": "8.3"
+        "version": "8.5"
     },
     "pwsh": {
         "version": "7.4"

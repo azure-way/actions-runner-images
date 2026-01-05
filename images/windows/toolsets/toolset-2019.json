@@ -5,11 +5,11 @@
             "arch": "x64",
             "platform" : "win32",
             "versions": [
-                "3.0",
                 "3.1",
-                "3.2"
+                "3.2",
+                "3.3"
             ],
-            "default": "3.0"
+            "default": "3.3"
         },
         {
             "name": "Python",
@@ -17,14 +17,14 @@
             "arch": "x64",
             "platform" : "win32",
             "versions": [
-                "3.7.*",
-                "3.8.*",
                 "3.9.*",
                 "3.10.*",
                 "3.11.*",
-                "3.12.*"
+                "3.12.*",
+                "3.13.*",
+                "3.14.*"
             ],
-            "default": "3.7.*"
+            "default": "3.9.*"
         },
         {
             "name": "Python",
@@ -32,12 +32,11 @@
             "arch": "x86",
             "platform" : "win32",
             "versions": [
-                "3.7.*",
-                "3.8.*",
                 "3.9.*",
                 "3.10.*",
                 "3.11.*",
-                "3.12.*"
+                "3.12.*",
+                "3.13.*"
             ]
         },
         {
@@ -59,9 +58,9 @@
             "arch": "x64",
             "platform" : "win32",
             "versions": [
-                "16.*",
                 "18.*",
-                "20.*"
+                "20.*",
+                "22.*"
             ]
         },
         {
@@ -70,11 +69,12 @@
             "arch": "x64",
             "platform" : "win32",
             "versions": [
-                "1.20.*",
-                "1.21.*",
-                "1.22.*"
+                "1.22.*",
+                "1.23.*",
+                "1.24.*",
+                "1.25.*"
             ],
-            "default": "1.21.*"
+            "default": "1.24.*"
         }
     ],
     "powershellModules": [
@@ -91,36 +91,9 @@
     ],
     "azureModules": [
         {
-            "name": "azurerm",
-            "versions": [
-                "2.1.0",
-                "6.13.1"
-            ],
-            "zip_versions": [
-                "3.8.0",
-                "4.2.1",
-                "5.1.1",
-                "6.7.0"
-            ],
-            "default": "2.1.0"
-        },
-        {
-            "name": "azure",
-            "versions": [
-                "2.1.0",
-                "5.3.0"
-            ],
-            "zip_versions": [
-                "3.8.0",
-                "4.2.1",
-                "5.1.1"
-            ],
-            "default": "2.1.0"
-        },
-        {
             "name": "az",
             "versions": [
-                "12.1.0"
+                "12.5.0"
             ],
             "zip_versions": [
             ]
@@ -147,14 +120,14 @@
             "addon-google_apis-google-21"
         ],
         "additional_tools": [
-            "cmake;3.10.2.4988404",
             "cmake;3.18.1",
-            "cmake;3.22.1"
+            "cmake;3.22.1",
+            "cmake;3.31.5"
         ],
         "ndk": {
             "default": "27",
             "versions": [
-                "26" , "27"
+                "26" , "27", "28"
             ]
         }
     },
@@ -247,9 +220,6 @@
         "subversion" : "16",
         "edition" : "Enterprise",
         "channel": "release",
-        "signature": ["F9A7CF9FBE13BAC767F4781061332DA6E8B4E0EE",
-                       "C2048FB509F1C37A8C3E9EC6648118458AA01780" 
-                    ],
         "workloads": [
             "Component.Dotfuscator",
             "Component.Linux.CMake",
@@ -314,13 +284,7 @@
             "Microsoft.VisualStudio.Component.VC.v141.MFC.ARM64.Spectre",
             "Microsoft.VisualStudio.Component.VC.v141.MFC.Spectre",
             "Microsoft.VisualStudio.Component.VC.14.25.x86.x64",
-            "Microsoft.VisualStudio.Component.Windows10SDK.16299",
-            "Microsoft.VisualStudio.Component.Windows10SDK.17134",
-            "Microsoft.VisualStudio.Component.Windows10SDK.17763",
-            "Microsoft.VisualStudio.Component.Windows10SDK.18362",
             "Microsoft.VisualStudio.Component.Windows10SDK.19041",
-            "Microsoft.VisualStudio.Component.Windows10SDK.20348",
-            "Microsoft.VisualStudio.Component.Windows11SDK.22000",
             "Microsoft.VisualStudio.Component.WinXP",
             "Microsoft.VisualStudio.Component.Workflow",
             "Microsoft.VisualStudio.ComponentGroup.Azure.CloudServices",
@@ -350,12 +314,12 @@
             "Component.MDD.Linux.GCC.arm"
         ],
         "vsix": [
-            "ProBITools.MicrosoftAnalysisServicesModelingProjects",
-            "SSIS.SqlServerIntegrationServicesProjects",
             "ProBITools.MicrosoftReportProjectsforVisualStudio",
             "VisualStudioClient.MicrosoftVisualStudio2017InstallerProjects",
             "ms-biztalk.BizTalk",
-            "WixToolset.WixToolsetVisualStudio2019Extension"
+            "WixToolset.WixToolsetVisualStudio2019Extension",
+            "ProBITools.MicrosoftAnalysisServicesModelingProjects",
+            "SSIS.SqlServerIntegrationServicesProjects"
         ]
     },
     "docker": {
@@ -367,8 +331,8 @@
             "mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019"
         ],
         "components": {
-            "docker": "26.1.3",
-            "compose": "2.27.1"
+            "docker": "27.5.1",
+            "compose": "2.32.2"
         }
     },
     "pipx": [
@@ -397,19 +361,19 @@
     },
     "serviceFabric": {
         "runtime": {
-            "version": "9.1.1436.9590",
-            "checksum": "089F9BE6A63AF66C337E507B52082575C8ED330DF765259C6F2F13F900DA96D5"
+            "version": "10.1.2493.9590",
+            "checksum": "09C63A971BACDE338282C73B3C9174BED9AAD53E1D3A1B73D44515852C9C00CF"
         },
         "sdk": {
-            "version": "6.1.1436",
-            "checksum": "D2A6B58315D08B6E46C2D25E91DFA1163136F70A5FA8CEF9DB147F07EE001AD1"
+            "version": "7.1.2493",
+            "checksum": "0CB1084156C75CF5075EA91ABA330CF10B58648B8E036C9C2F286805263C497F"
         }
     },
     "dotnet": {
         "versions": [
             "6.0",
-            "7.0",
-            "8.0"
+            "8.0",
+            "9.0"
         ],
         "tools": [
             { "name": "nbgv", "test": "nbgv --version", "getversion": "nbgv --version" }
@@ -419,8 +383,8 @@
     "choco": {
         "common_packages": [
             { "name": "7zip.install" },
-            { "name": "aria2" },
             { "name": "azcopy10" },
+            { "name": "aria2" },
             { "name": "Bicep" },
             { "name": "gitversion.portable"},
             { "name": "innosetup" },
@@ -440,43 +404,52 @@
             },
             {
                 "name": "cmake.install",
+                "version": "3.31.6",
                 "args": [ "--installargs", "ADD_CMAKE_TO_PATH=\"System\"" ]
             },
-            { "name": "imagemagick" }
+            { "name": "imagemagick" },
+            { "name": "ninja" }
         ]
     },
     "node": {
-        "default": "18"
+        "default": "18.*"
     },
     "maven": {
-        "version": "3.8"
+        "version": "3.9"
     },
     "mysql": {
-        "version": "5.7",
-        "signature": "DD34D7C71F160972DE0CE25B695A0D6A9C95BD91"
+        "version": "5.7"
     },
     "mongodb": {
-        "version": "5.0",
-        "signature": "F2D7C28591847BB2CB2B1C2A0C59459FDC728A38"
+        "version": "5.0"
     },
     "nsis": {
         "version": "3.10"
     },
     "php": {
-        "version": "8.3"
+        "version": "8.4"
     },
     "llvm": {
         "version": "18"
     },
     "postgresql": {
-        "version": "14.12.1",
-        "signature": "698BA51AA27CC31282AACA5055E4B9190BC6C0E9"
+        "version": "14"
     },
     "kotlin": {
-        "version": "latest"
+        "version": "2.1.10",
+        "pinnedDetails": {
+            "link": "https://github.com/actions/runner-images/issues/12045",
+            "reason": "Image is deprecated and will be removed soon",
+            "review-at": "2027-01-01"
+        }
     },
     "openssl": {
-        "version": "1.1.1"
+        "version": "1.1.1",
+        "pinnedDetails": {
+            "link": "https://github.com/actions/runner-images/issues/12045",
+            "reason": "Image is deprecated and will be removed soon",
+            "review-at": "2027-01-01"
+        }
     },
     "pwsh": {
         "version": "7.4"
