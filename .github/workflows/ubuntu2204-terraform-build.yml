@@ -14,7 +14,7 @@ jobs:
     uses: ./.github/workflows/terraform-execution.yml
     with:
       image_type: 'ubuntu'
-      image_type_version: '22.04'
+      image_type_version: '22_04'
       image_readme_path: 'ubuntu/Ubuntu2204-Readme.md'
       short_image_name: 'u'
       state: tf-ubuntu-2204.tfstate
