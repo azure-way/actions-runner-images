@@ -64,7 +64,7 @@ resource "null_resource" "packer_runner" {
              -var "client_id=${var.spn-client-id}" \
              -var "client_secret=${var.spn-client-secret}" \
              -var "location=${var.location}" \
-             -var "image_os=${var.image_type == "ubuntu" ? (var.image_type_version == "22_04" ? "ubuntu22" : "ubuntu24") : "windows"}" \
+             -var "image_os=${var.image_type == "ubuntu" ? (var.image_type_version == "22_04" ? "ubuntu22" : "ubuntu24") : (var.image_type_version == "2019" ? "win19" : (var.image_type_version == "2022" ? "win22" : "win25"))}" \
              -var "image_version=${var.image_version}" \
              -var "install_password=7ed7e306-2c09-40b8-a40a-1d79bdbb7a47" \
              -var "subscription_id=${var.subscription-id}" \
