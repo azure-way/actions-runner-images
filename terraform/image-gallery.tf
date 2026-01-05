@@ -60,7 +60,7 @@ resource "null_resource" "packer_runner" {
     interpreter = ["/bin/sh", "-c"]
     working_dir = local.image_template_dir
     command     = <<EOT
-        packer build -only="${var.image_type}-${var.image_type_version}.azure-arm.image" \
+        packer build -only="${var.image_type}-${var.image_type_version}" \
              -var "client_id=${var.spn-client-id}" \
              -var "client_secret=${var.spn-client-secret}" \
              -var "location=${var.location}" \
