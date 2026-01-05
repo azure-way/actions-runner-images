@@ -49,3 +49,8 @@ variable "spn-client-secret" {
 variable "spn-tenant-id" {
   description = "Tenant ID for service principal"
 }
+
+variable "run_id" {
+  description = "Run packer flag"
+  type = string
+}
