@@ -15,8 +15,8 @@ add_filtered_installation_components() {
     local tools_array=("$@")
 
     for item in ${tools_array[@]}; do
-        # Take the last argument after splitting string by ';'' and '-''
-        item_version=$(echo "${item##*[-;]}")
+        # Take the last version number that appears after the last '-' or ';'
+        item_version=$(echo "$item" | grep -oE '[-;][0-9.]+' | grep -oE '[0-9.]+')
 
         # Semver 'comparison'. Add item to components array, if item's version is greater than or equal to minimum version
         if [[ "$(printf "${minimum_version}\n${item_version}\n" | sort -V | head -n1)" == "$minimum_version" ]]; then
@@ -109,6 +109,9 @@ available_build_tools=$(echo ${all_build_tools[@]//*rc[0-9]/})
 
 add_filtered_installation_components $minimum_platform_version "${available_platforms[@]}"
 add_filtered_installation_components $minimum_build_tool_version "${available_build_tools[@]}"
+
+# Add platform tools to the list of components to install
+components+=("platform-tools")
 
 # Install components
 echo "y" | $SDKMANAGER ${components[@]}

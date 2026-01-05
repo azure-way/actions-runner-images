@@ -30,16 +30,6 @@ Describe "Certificate" {
     }
 }
 
-Describe "Audio device" -Skip:($os.IsVentura -or $os.IsSonoma -or $os.IsSequoia) {
-    It "Sox is installed" {
-        "sox --version" | Should -ReturnZeroExitCode
-    }
-
-    It "SwitchAudioSource is installed" {
-        "SwitchAudioSource -c" | Should -ReturnZeroExitCode
-    }
-}
-
 Describe "AutomationModeTool" {
     It "Does not require user authentication" {
         automationmodetool | Out-String | Should -Match "DOES NOT REQUIRE"

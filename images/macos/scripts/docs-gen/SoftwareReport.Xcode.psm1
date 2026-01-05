@@ -72,6 +72,8 @@ function Get-XcodePlatformOrder {
         "Simulator - tvOS" { 5 }
         "watchOS" { 6 }
         "Simulator - watchOS" { 7 }
+        "visionOS" { 8 }
+        "Simulator - visionOS" { 9 }
         Default { 100 }
     }
 }
@@ -223,36 +225,18 @@ function Build-XcodeSimulatorsTable {
             }
         }
         return [PSCustomObject] @{
-            "OS" = $runtime.name
+            "Name"       = $runtime.name
+            "OS"         = $runtime.version
             "Simulators" = [String]::Join("<br>", $sortedRuntimeDevices)
         }
     } | Sort-Object {
         # Sort rule 1
-        $sdkNameParts = $_."OS".Split(" ")
+        $sdkNameParts = $_."Name".Split(" ")
         $platformName = [String]::Join(" ", $sdkNameParts[0..($sdkNameParts.Length - 2)])
         return Get-XcodePlatformOrder $platformName
     }, {
         # Sort rule 2
-        $sdkNameParts = $_."OS".Split(" ")
+        $sdkNameParts = $_."Name".Split(" ")
         return [System.Version]::Parse($sdkNameParts[-1])
     }
-}
-
-function Build-XcodeSupportToolsSection {
-    $toolNodes = @()
-
-    $xcpretty = Run-Command "xcpretty --version"
-    $xcversion = Run-Command "xcversion --version" | Select-String "^[0-9]"
-
-    $toolNodes += [ToolVersionNode]::new("xcpretty", $xcpretty)
-    if ($os.IsMonterey) {
-        $toolNodes += [ToolVersionNode]::new("xcversion", $xcversion)
-    }
-
-    $nomadOutput = Run-Command "gem list nomad-cli"
-    $nomadCLI = [regex]::matches($nomadOutput, "(\d+.){2}\d+").Value
-    $nomadShenzhenOutput = Run-Command "ipa -version"
-    $nomadShenzhen = [regex]::matches($nomadShenzhenOutput, "(\d+.){2}\d+").Value
-
-    return $toolNodes
 }

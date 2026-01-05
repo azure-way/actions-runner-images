@@ -14,6 +14,9 @@ Function Install-VisualStudio {
 
     .PARAMETER Channel
         The channel of Visual Studio that will be installed. Required parameter.
+     
+    .PARAMETER InstallChannel
+        The InstallChannelUri of Visual Studio that will be installed. Required parameter.
 
     .PARAMETER RequiredComponents
         The list of required components. Required parameter.
@@ -27,24 +30,31 @@ Function Install-VisualStudio {
         [Parameter(Mandatory)] [String] $Version,
         [Parameter(Mandatory)] [String] $Edition,
         [Parameter(Mandatory)] [String] $Channel,
+        [String] $InstallChannel = "",
         [Parameter(Mandatory)] [String[]] $RequiredComponents,
-        [String] $ExtraArgs = "",
-        [Parameter(Mandatory)] [String[]] $SignatureThumbprint
+        [String] $ExtraArgs = ""
     )
-
-    $bootstrapperUrl = "https://aka.ms/vs/${Version}/${Channel}/vs_${Edition}.exe"
+    
+    
+    if (-not (Test-IsWin19)) {
+        $bootstrapperUrl = "https://aka.ms/vs/${Version}/postGRO-${Channel}/vs_${Edition}.exe"
+    } else {
+        $bootstrapperUrl = "https://aka.ms/vs/${Version}/${Channel}/vs_${Edition}.exe"
+    }
     $channelUri = "https://aka.ms/vs/${Version}/${Channel}/channel"
     $channelId = "VisualStudio.${Version}.Release"
     $productId = "Microsoft.VisualStudio.Product.${Edition}"
+    $installChannelUri = "https://aka.ms/vs/${Version}/${Channel}/${installchannel}/channel"
 
     Write-Host "Downloading Bootstrapper ..."
     $bootstrapperFilePath = Invoke-DownloadWithRetry $BootstrapperUrl
 
     # Verify that the bootstrapper is signed by Microsoft
-    Test-FileSignature -Path $bootstrapperFilePath -ExpectedThumbprint $SignatureThumbprint
+    Test-FileSignature -Path $bootstrapperFilePath -ExpectedSubject $(Get-MicrosoftPublisher)
 
     try {
         $responseData = @{
+            "installChannelUri" = $installChannelUri
             "channelUri" = $channelUri
             "channelId"  = $channelId
             "productId"  = $productId
@@ -196,11 +206,11 @@ function Get-VsixInfoFromMarketplace {
         # ProBITools.MicrosoftReportProjectsforVisualStudio2022 has different URL
         # https://github.com/actions/runner-images/issues/5340
         "ProBITools.MicrosoftReportProjectsforVisualStudio2022" {
-            $assetUri = "https://download.microsoft.com/download/b/b/5/bb57be7e-ae72-4fc0-b528-d0ec224997bd"
+            $assetUri = "https://download.microsoft.com/download/1fd275d8-5163-476b-910b-e2f678b3fdbc"
             $fileName = "Microsoft.DataTools.ReportingServices.vsix"
         }
         "ProBITools.MicrosoftAnalysisServicesModelingProjects2022" {
-            $assetUri = "https://download.microsoft.com/download/c/8/9/c896a7f2-d0fd-45ac-90e6-ff61f67523cb"
+            $assetUri = "https://download.microsoft.com/download/7c91cb5c-1e9c-4df7-a053-d2852e22c658"
             $fileName = "Microsoft.DataTools.AnalysisServices.vsix"
         }
 

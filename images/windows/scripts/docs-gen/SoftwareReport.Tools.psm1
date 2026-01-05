@@ -121,8 +121,13 @@ function Get-MySQLVersion {
     return $mysqlVersion
 }
 
-function Get-SQLOLEDBDriverVersion {
+function Get-SQLOLEDBDriver18Version {
     $SQLOLEDBDriverVersion = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSOLEDBSQL' InstalledVersion).InstalledVersion
+    return $SQLOLEDBDriverVersion
+}
+
+function Get-SQLOLEDBDriver19Version {
+    $SQLOLEDBDriverVersion = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSOLEDBSQL19' InstalledVersion).InstalledVersion
     return $SQLOLEDBDriverVersion
 }
 
@@ -299,7 +304,7 @@ function Get-VisualCPPComponents {
 }
 
 function Get-DacFxVersion {
-    $dacfxversion = & "$env:ProgramFiles\Microsoft SQL Server\160\DAC\bin\sqlpackage.exe" /version
+    $dacfxversion = & "$env:ProgramFiles\Microsoft SQL Server\170\DAC\bin\sqlpackage.exe" /version
     return $dacfxversion
 }
 
@@ -321,4 +326,8 @@ function Get-MongoshVersion {
 
 function Get-WSL2Version {
     return $((Get-AppxPackage -Name "MicrosoftCorporationII.WindowsSubsystemForLinux").version)
+}
+
+function Get-NinjaVersion {
+    return $(ninja --version)
 }

@@ -51,7 +51,7 @@ Describe "R" {
 Describe "DACFx" {
     It "DACFx" {
         (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName -Contains "Microsoft SQL Server Data-Tier Application Framework" | Should -BeTrue
-        $sqlPackagePath = 'C:\Program Files\Microsoft SQL Server\160\DAC\bin\SqlPackage.exe'
+        $sqlPackagePath = 'C:\Program Files\Microsoft SQL Server\170\DAC\bin\SqlPackage.exe'
         "${sqlPackagePath}" | Should -Exist
     }
 
@@ -201,16 +201,24 @@ Describe "Pipx" {
 }
 
 Describe "Kotlin" {
-    $kotlinPackages = @("kapt", "kotlin", "kotlinc", "kotlinc-js", "kotlinc-jvm")
+    $kotlinPackages = @("kapt", "kotlin", "kotlinc", "kotlinc-jvm")
 
     It "<toolName> is available" -TestCases ($kotlinPackages | ForEach-Object { @{ toolName = $_ } }) {
         "$toolName -version" | Should -ReturnZeroExitCode
     }
+
+    It "kotlinc-js is available" {
+        "kotlinc-js -help" | Should -ReturnZeroExitCode
+    }
 }
 
 Describe "SQL OLEDB Driver" {
-    It "SQL OLEDB Driver" {
+    It "SQL OLEDB Driver 18" {
         "HKLM:\SOFTWARE\Microsoft\MSOLEDBSQL" | Should -Exist
+    }
+
+    It "SQL OLEDB Driver 19" {
+        "HKLM:\SOFTWARE\Microsoft\MSOLEDBSQL19" | Should -Exist
     }
 }
 
@@ -226,5 +234,10 @@ Describe "OpenSSL" {
 
     It "OpenSSL Full package" {
         Join-Path ${env:ProgramFiles} 'OpenSSL\include' | Should -Exist
+    }
+
+    It "OpenSSL DLLs not in System32" {
+        Get-ChildItem -Path "$env:SystemRoot\System32" -Filter "libcrypto-*.dll" -File -ErrorAction SilentlyContinue | Should -BeNullOrEmpty
+	    Get-ChildItem -Path "$env:SystemRoot\System32" -Filter "libssl-*.dll" -File -ErrorAction SilentlyContinue | Should -BeNullOrEmpty
     }
 }

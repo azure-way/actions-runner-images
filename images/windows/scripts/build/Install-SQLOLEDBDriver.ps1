@@ -3,7 +3,14 @@
 ##  Desc:  Install OLE DB Driver for SQL Server
 ################################################################################
 
+# Install OLE DB Driver 18
 Install-Binary -Type MSI `
     -Url "https://go.microsoft.com/fwlink/?linkid=2242656" `
     -ExtraInstallArgs @("ADDLOCAL=ALL", "IACCEPTMSOLEDBSQLLICENSETERMS=YES") `
-    -ExpectedSignature '6E78B3DCE2998F6C2457C3E54DA90A01034916AE'
+    -ExpectedSubject $(Get-MicrosoftPublisher)
+
+# Install OLE DB Driver 19
+Install-Binary -Type MSI `
+    -Url "https://go.microsoft.com/fwlink/?linkid=2318101" `
+    -ExtraInstallArgs @("ADDLOCAL=ALL", "IACCEPTMSOLEDBSQLLICENSETERMS=YES") `
+    -ExpectedSubject $(Get-MicrosoftPublisher)

@@ -10,8 +10,11 @@ echo "Enabling developer mode..."
 sudo /usr/sbin/DevToolsSecurity --enable
 
 # Turn off hibernation and get rid of the sleepimage
-sudo pmset hibernatemode 0
+sudo pmset -a hibernatemode 0
 sudo rm -f /var/vm/sleepimage
+
+# Set computer, disk, and display sleep to never
+sudo pmset -a sleep 0 disksleep 0 displaysleep 0
 
 # Disable App Nap System Wide
 defaults write NSGlobalDomain NSAppSleepDisabled -bool YES
@@ -90,6 +93,12 @@ if [[ ! "$(automationmodetool)" =~ "DOES NOT REQUIRE" ]]; then
     exit 1
 fi
 
+# Fix sudoers file permissions
+sudo chmod 440 /etc/sudoers.d/*
+
+# Add NOPASSWD for the current user to sudoers
+sudo sed -i '' 's/%admin		ALL = (ALL) ALL/%admin		ALL = (ALL) NOPASSWD: ALL/g' /etc/sudoers
+
 # Create symlink for tests running
 if [[ ! -d "/usr/local/bin" ]];then
     sudo mkdir -p -m 775 /usr/local/bin
@@ -97,3 +106,7 @@ if [[ ! -d "/usr/local/bin" ]];then
 fi
 chmod +x $HOME/utils/invoke-tests.sh
 sudo ln -s $HOME/utils/invoke-tests.sh /usr/local/bin/invoke_tests
+
+# Fix share dir permissions
+sudo chown "$USER":admin /usr/local/share
+sudo chmod 775 /usr/local/share

@@ -83,9 +83,7 @@ if (Test-IsWin19) {
     $tools.AddToolVersion("Google Cloud CLI", $(Get-GoogleCloudCLIVersion))
 }
 $tools.AddToolVersion("ImageMagick", $(Get-ImageMagickVersion))
-if (-not (Test-IsWin25)) {
-    $tools.AddToolVersion("InnoSetup", $(Get-InnoSetupVersion))
-}
+$tools.AddToolVersion("InnoSetup", $(Get-InnoSetupVersion))
 $tools.AddToolVersion("jq", $(Get-JQVersion))
 $tools.AddToolVersion("Kind", $(Get-KindVersion))
 $tools.AddToolVersion("Kubectl", $(Get-KubectlVersion))
@@ -117,6 +115,7 @@ $tools.AddToolVersion("WinAppDriver", $(Get-WinAppDriver))
 $tools.AddToolVersion("WiX Toolset", $(Get-WixVersion))
 $tools.AddToolVersion("yamllint", $(Get-YAMLLintVersion))
 $tools.AddToolVersion("zstd", $(Get-ZstdVersion))
+$tools.AddToolVersion("Ninja", $(Get-NinjaVersion))
 
 # CLI Tools
 $cliTools = $installedSoftware.AddHeader("CLI Tools")
@@ -192,11 +191,11 @@ $databaseTools = $installedSoftware.AddHeader("Database tools")
 $databaseTools.AddToolVersion("Azure CosmosDb Emulator", $(Get-AzCosmosDBEmulatorVersion))
 $databaseTools.AddToolVersion("DacFx", $(Get-DacFxVersion))
 $databaseTools.AddToolVersion("MySQL", $(Get-MySQLVersion))
-$databaseTools.AddToolVersion("SQL OLEDB Driver", $(Get-SQLOLEDBDriverVersion))
+$databaseTools.AddToolVersion("SQL OLEDB Driver 18", $(Get-SQLOLEDBDriver18Version))
+$databaseTools.AddToolVersion("SQL OLEDB Driver 19", $(Get-SQLOLEDBDriver19Version))
 $databaseTools.AddToolVersion("SQLPS", $(Get-SQLPSVersion))
-if (Test-IsWin25) {
-    $databaseTools.AddToolVersion("MongoDB Shell (mongosh)", $(Get-MongoshVersion))
-}
+$databaseTools.AddToolVersion("MongoDB Shell (mongosh)", $(Get-MongoshVersion))
+
 
 # Web Servers
 $installedSoftware.AddHeader("Web Servers").AddTable($(Build-WebServersSection))
@@ -220,7 +219,7 @@ if (Test-IsWin19) {
     # Visual Studio 2019 brings own version of .NET Core which is different from latest official version
     $netCoreTools.AddToolVersionsListInline(".NET Core SDK", $(Get-DotnetSdks).Versions, '^\d+\.\d+\.\d{2}')
 } else {
-    $netCoreTools.AddToolVersionsListInline(".NET Core SDK", $(Get-DotnetSdks).Versions, '^\d+\.\d+\.\d')
+    $netCoreTools.AddToolVersionsListInline(".NET Core SDK", $(Get-DotnetSdks).Versions, '^\d+\.\d+\.\d{3}')
 }
 $netCoreTools.AddToolVersionsListInline(".NET Framework", $(Get-DotnetFrameworkVersions), '^.+')
 Get-DotnetRuntimes | ForEach-Object {
@@ -235,14 +234,6 @@ $psTools.AddToolVersion("PowerShell", $(Get-PowershellCoreVersion))
 $psModules = $psTools.AddHeader("Powershell Modules")
 $psModules.AddNodes($(Get-PowerShellModules))
 
-$azPsNotes = @'
-Azure PowerShell module 2.1.0 and AzureRM PowerShell module 2.1.0 are installed
-and are available via 'Get-Module -ListAvailable'.
-All other versions are saved but not installed.
-'@
-if (-not (Test-IsWin25)) {
-    $psModules.AddNote($azPsNotes)
-}
 
 # Android
 $android = $installedSoftware.AddHeader("Android")

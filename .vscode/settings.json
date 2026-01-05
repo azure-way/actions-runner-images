@@ -22,7 +22,13 @@
   "shellcheck.customArgs": [
     "-x"
   ],
-  "githubPullRequests.ignoredPullRequestBranches": [
-    "main"
-  ]
+  "json.schemas": [
+    {
+        "fileMatch": [
+            "**/toolset-*.json"
+        ],
+        "url": "./schemas/toolset-schema.json"
+    }
+]
+
 }

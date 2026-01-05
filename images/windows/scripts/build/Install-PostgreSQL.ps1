@@ -5,7 +5,10 @@
 
 # Define user and password for PostgreSQL database
 $pgUser = "postgres"
-$pgPwd = "root"
+$pgPwd  = "root"
+
+# Save current value of ErrorActionPreference and set it to Stop
+$errorActionOldValue = $ErrorActionPreference
 
 # Prepare environment variable for validation
 [Environment]::SetEnvironmentVariable("PGUSER", $pgUser, "Machine")
@@ -35,7 +38,6 @@ if ($null -ne ($toolsetVersion | Select-String -Pattern '\d+\.\d+\.\d+')) {
     $targetMinorVersions = ($minorVersions | Sort-Object)[-1]
 
     # In order to get rid of error messages (we know we will have them), force ErrorAction to SilentlyContinue
-    $errorActionOldValue = $ErrorActionPreference
     $ErrorActionPreference = 'SilentlyContinue'
 
     # Install latest PostgreSQL
@@ -60,19 +62,38 @@ if ($null -ne ($toolsetVersion | Select-String -Pattern '\d+\.\d+\.\d+')) {
 
 # Return the previous value of ErrorAction and invoke Install-Binary function
 $ErrorActionPreference = $errorActionOldValue
-$installerArgs = @("--install_runtimes 0", "--superpassword root", "--enable_acledit 1", "--unattendedmodeui none", "--mode unattended")
+
+# Define new data directory for PostgreSQL and create it
+if ($installerUrl -match 'postgresql-(\d+)') {
+    $pgMajorVersion = $matches[1]
+}
+$pgData = "C:\PostgreSQL\$pgMajorVersion\data"
+if (-Not (Test-Path -Path $pgData)) {
+    New-Item -ItemType Directory -Path $pgData | Out-Null
+}
+
+# Define silent install arguments for PostgreSQL
+$installerArgs = @(
+    "--install_runtimes 0",
+    "--superpassword root",
+    "--enable_acledit 1",
+    "--unattendedmodeui none",
+    "--mode unattended",
+    "--datadir `"$pgData`""
+)
+
 Install-Binary `
     -Url $installerUrl `
     -InstallArgs $installerArgs `
-    -ExpectedSignature (Get-ToolsetContent).postgresql.signature
+    -ExpectedSubject 'CN=EnterpriseDB Corporation, O=EnterpriseDB Corporation, S=Massachusetts, C=US' `
+    -InstallerLogPath "$env:TEMP\**\install-postgresql.log"
 
 # Get Path to pg_ctl.exe
 $pgPath = (Get-CimInstance Win32_Service -Filter "Name LIKE 'postgresql-%'").PathName
 
 # Parse output of command above to obtain pure path
 $pgBin = Split-Path -Path $pgPath.split('"')[1]
-$pgRoot = Split-Path -Path $pgPath.split('"')[5]
-$pgData = Join-Path $pgRoot "data"
+$pgRoot = Split-Path $pgBin -Parent
 
 # Validate PostgreSQL installation
 $pgReadyPath = Join-Path $pgBin "pg_isready.exe"
