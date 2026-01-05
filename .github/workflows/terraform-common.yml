@@ -13,6 +13,7 @@ jobs:
         short_image_name: 'u'
         state: tf-community-gallery-base.tfstate
         directory: './terraform_base'
+        run_id: ${{ github.run_id }}
     secrets: inherit  
   CommunityGalleryUbuntu2404:
     uses: ./.github/workflows/terraform-execution.yml
@@ -24,6 +25,7 @@ jobs:
         short_image_name: 'u'
         state: tf-community-gallery-base.tfstate
         directory: './terraform_base'
+        run_id: ${{ github.run_id }}
     secrets: inherit      
   CommunityGalleryWindows2019:
     uses: ./.github/workflows/terraform-execution.yml
@@ -35,6 +37,7 @@ jobs:
         short_image_name: 'w'
         state: tf-community-gallery-base.tfstate
         directory: './terraform_base'
+        run_id: ${{ github.run_id }}        
     secrets: inherit     
   CommunityGallery:
     uses: ./.github/workflows/terraform-execution.yml
@@ -46,6 +49,7 @@ jobs:
         short_image_name: 'w'
         state: tf-community-gallery-base.tfstate
         directory: './terraform_base'
+        run_id: ${{ github.run_id }}        
     secrets: inherit    
   CommunityGallery2025:
     uses: ./.github/workflows/terraform-execution.yml
@@ -57,4 +61,5 @@ jobs:
         short_image_name: 'w'
         state: tf-community-gallery-base.tfstate
         directory: './terraform_base'
+        run_id: ${{ github.run_id }}        
     secrets: inherit        
