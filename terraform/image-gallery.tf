@@ -60,7 +60,8 @@ resource "null_resource" "packer_runner" {
     interpreter = ["/bin/sh", "-c"]
     working_dir = local.image_template_dir
     command     = <<EOT
-        packer build -var "client_id=${var.spn-client-id}" \
+        packer build -only="${var.image_type}-${var.image_type_version}.azure-arm.image" \
+             -var "client_id=${var.spn-client-id}" \
              -var "client_secret=${var.spn-client-secret}" \
              -var "location=${var.location}" \
              -var "image_os=${var.image_type == "ubuntu" ? (var.image_type_version == "22_04" ? "ubuntu22" : "ubuntu24") : "windows"}" \
@@ -75,7 +76,7 @@ resource "null_resource" "packer_runner" {
              -var "managed_image_name=${var.image_version}-${data.azurerm_shared_image.image.name}" \
              -var "managed_image_resource_group_name=${data.azurerm_resource_group.automation_resource_group.name}" \
              -color=false \
-             ${local.imagePath}
+             .
     EOT
 
     environment = {
