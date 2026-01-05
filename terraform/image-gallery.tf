@@ -63,17 +63,19 @@ resource "null_resource" "packer_runner" {
         packer build -var "client_id=${var.spn-client-id}" \
              -var "client_secret=${var.spn-client-secret}" \
              -var "location=${var.location}" \
+             -var "image_os=${var.image_type == "ubuntu" ? (var.image_type_version == "22_04" ? "ubuntu22" : "ubuntu24") : "windows"}" \
+             -var "image_version=${var.image_version}" \
              -var "install_password=7ed7e306-2c09-40b8-a40a-1d79bdbb7a47" \
              -var "subscription_id=${var.subscription-id}" \
              -var "temp_resource_group_name=temp-rg-${var.image_version}-${var.image_type}-${var.image_type_version}" \
              -var "tenant_id=${var.spn-tenant-id}" \
-             -var "virtual_network_name=$null" \
-             -var "virtual_network_resource_group_name=$null" \
-             -var "virtual_network_subnet_name=$null" \
+             -var "virtual_network_name=" \
+             -var "virtual_network_resource_group_name=" \
+             -var "virtual_network_subnet_name=" \
              -var "managed_image_name=${var.image_version}-${data.azurerm_shared_image.image.name}" \
              -var "managed_image_resource_group_name=${data.azurerm_resource_group.automation_resource_group.name}" \
              -color=false \
-             "${local.imagePath}"
+             ${local.imagePath}
     EOT
 
     environment = {
