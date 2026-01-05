@@ -1,6 +1,6 @@
 locals {
   prefix            = "community-gallery"
-  image_template_dir = "${path.module}/../images/${var.image_type}/templates"
+  image_template_dir = "../images/${var.image_type}/templates"
   imagePath         = "build.${var.image_type}-${var.image_type_version}.pkr.hcl"
 }
 
