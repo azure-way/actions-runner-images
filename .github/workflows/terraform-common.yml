@@ -53,7 +53,7 @@ jobs:
     secrets: inherit    
   CommunityGallery2025:
     uses: ./.github/workflows/terraform-execution.yml
-    needs: CommunityGalleryWindows2019
+    needs: CommunityGallery
     with:
         image_type: 'windows'
         image_type_version: '2025'

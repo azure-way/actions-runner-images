@@ -26,19 +26,19 @@ resource "azurerm_resource_group" "automation_resource_group" {
   location = var.location
 }
 
-resource "azurerm_shared_image" "ubuntu_2004" {
-  name                = "azureway-u-20.04"
-  gallery_name        = azurerm_shared_image_gallery.imageGallery.name
-  resource_group_name = azurerm_resource_group.automation_resource_group.name
-  location            = azurerm_resource_group.automation_resource_group.location
-  os_type             = "Linux"
+# resource "azurerm_shared_image" "ubuntu_2004" {
+#   name                = "azureway-u-20.04"
+#   gallery_name        = azurerm_shared_image_gallery.imageGallery.name
+#   resource_group_name = azurerm_resource_group.automation_resource_group.name
+#   location            = azurerm_resource_group.automation_resource_group.location
+#   os_type             = "Linux"
 
-  identifier {
-    publisher = "Azureway"
-    offer     = "GitHubActionsRunner_ubuntu-20.04"
-    sku       = "Free"
-  }
-}
+#   identifier {
+#     publisher = "Azureway"
+#     offer     = "GitHubActionsRunner_ubuntu-20.04"
+#     sku       = "Free"
+#   }
+# }
 
 resource "azurerm_shared_image" "ubuntu_2204" {
   name                = "azureway-u-22.04"
@@ -53,6 +53,20 @@ resource "azurerm_shared_image" "ubuntu_2204" {
     sku       = "Free"
   }
 }
+resource "azurerm_shared_image" "ubuntu_22_04" {
+  name                = "azureway-u-22_04"
+  gallery_name        = azurerm_shared_image_gallery.imageGallery.name
+  resource_group_name = azurerm_resource_group.automation_resource_group.name
+  location            = azurerm_resource_group.automation_resource_group.location
+  os_type             = "Linux"
+
+  identifier {
+    publisher = "Azureway"
+    offer     = "GitHubActionsRunner_ubuntu-22_04"
+    sku       = "Free"
+  }
+}
+
 
 resource "azurerm_shared_image" "ubuntu_2404" {
   name                = "azureway-u-24.04"
@@ -67,6 +81,21 @@ resource "azurerm_shared_image" "ubuntu_2404" {
     sku       = "Free"
   }
 }
+
+resource "azurerm_shared_image" "ubuntu_24_04" {
+  name                = "azureway-u-24_04"
+  gallery_name        = azurerm_shared_image_gallery.imageGallery.name
+  resource_group_name = azurerm_resource_group.automation_resource_group.name
+  location            = azurerm_resource_group.automation_resource_group.location
+  os_type             = "Linux"
+
+  identifier {
+    publisher = "Azureway"
+    offer     = "GitHubActionsRunner_ubuntu-24_04"
+    sku       = "Free"
+  }
+}
+
 
 resource "azurerm_shared_image" "windows_2019" {
   name                = "azureway-w-2019"
@@ -92,6 +121,20 @@ resource "azurerm_shared_image" "windows_2022" {
   identifier {
     publisher = "Azureway"
     offer     = "GitHubActionsRunner_windows-2022"
+    sku       = "Free"
+  }
+}
+
+resource "azurerm_shared_image" "windows_2025" {
+  name                = "azureway-w-2025"
+  gallery_name        = azurerm_shared_image_gallery.imageGallery.name
+  resource_group_name = azurerm_resource_group.automation_resource_group.name
+  location            = azurerm_resource_group.automation_resource_group.location
+  os_type             = "Windows"
+
+  identifier {
+    publisher = "Azureway"
+    offer     = "GitHubActionsRunner_windows-2025"
     sku       = "Free"
   }
 }
