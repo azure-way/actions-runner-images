@@ -1,7 +1,7 @@
 locals {
   prefix            = "community-gallery"
   image_template_dir = "${path.module}/../images/${var.image_type}/templates"
-  imagePath         = "${local.image_template_dir}/build.${var.image_type}-${var.image_type_version}.pkr.hcl"
+  imagePath         = "build.${var.image_type}-${var.image_type_version}.pkr.hcl"
 }
 
 data "azurerm_client_config" "current" {}
