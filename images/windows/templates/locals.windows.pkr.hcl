@@ -1,15 +1,15 @@
 locals {
     image_properties_map = {
-      "win19" = {
-            source_image_marketplace_sku = "MicrosoftWindowsServer:WindowsServer:2019-Datacenter"
-            os_disk_size_gb = 256
-      },
       "win22" = {
-            source_image_marketplace_sku = "MicrosoftWindowsServer:WindowsServer:2022-Datacenter"
+            source_image_marketplace_sku = "MicrosoftWindowsServer:WindowsServer:2022-Datacenter-g2"
             os_disk_size_gb = 256
       },
       "win25" = {
-            source_image_marketplace_sku = "MicrosoftWindowsServer:WindowsServer:2025-Datacenter"
+            source_image_marketplace_sku = "MicrosoftWindowsServer:WindowsServer:2025-Datacenter-g2"
+            os_disk_size_gb = 150
+      },
+      "win25-vs2026" = {
+            source_image_marketplace_sku = "MicrosoftWindowsServer:WindowsServer:2025-Datacenter-g2"
             os_disk_size_gb = 150
       }
   }
