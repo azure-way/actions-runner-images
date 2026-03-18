@@ -5,30 +5,32 @@
 | [Ubuntu-latest workflows will use Ubuntu-24.04 image](https://github.com/actions/runner-images/issues/10636) |
 | [[Ubuntu 20 and 22] Go version 1.20.0 will be removed on October 14,2024.](https://github.com/actions/runner-images/issues/10607) |
 ***
-# Ubuntu 22.04
-- OS Version: 22.04.5 LTS
-- Kernel Version: 6.5.0-1025-azure
+# Ubuntu 20.04
+- OS Version: 20.04.6 LTS
+- Kernel Version: 5.15.0-1074-azure
 - Image Version: 20241103.1.0
-- Systemd version: 249.11-0ubuntu3.12
+- Systemd version: 245.4-4ubuntu3.24
 
 ## Installed Software
 
 ### Language and Runtime
-- Bash 5.1.16(1)-release
-- Clang: 13.0.1, 14.0.0, 15.0.7
-- Clang-format: 13.0.1, 14.0.0, 15.0.7
-- Clang-tidy: 13.0.1, 14.0.0, 15.0.7
-- Dash 0.5.11+git20210903+057cd650a4ed-3build1
-- GNU C++: 10.5.0, 11.4.0, 12.3.0
-- GNU Fortran: 10.5.0, 11.4.0, 12.3.0
+- Bash 5.0.17(1)-release
+- Clang: 10.0.0, 11.0.0, 12.0.0
+- Clang-format: 10.0.0, 11.0.0, 12.0.0
+- Clang-tidy: 10.0.0, 11.0.0, 12.0.0
+- Dash 0.5.10.2-6
+- Erlang 25.3 (Eshell 13.2)
+- Erlang rebar3 3.24.0
+- GNU C++: 10.5.0
+- GNU Fortran: 10.5.0
 - Julia 1.11.1
 - Kotlin 2.0.21-release-482
 - Mono 6.12.0.200
 - MSBuild 16.10.1.31701 (Mono 6.12.0.200)
 - Node.js 18.20.4
-- Perl 5.34.0
-- Python 3.10.12
-- Ruby 3.0.2p107
+- Perl 5.30.0
+- Python 3.8.10
+- Ruby 2.7.0p0
 - Swift 6.0.2
 
 ### Package Management
@@ -38,10 +40,10 @@
 - Miniconda 24.9.2
 - Npm 10.7.0
 - NuGet 6.6.1.2
-- Pip 22.0.2
-- Pip3 22.0.2
+- Pip 20.0.2
+- Pip3 20.0.2
 - Pipx 1.7.1
-- RubyGems 3.3.5
+- RubyGems 3.1.2
 - Vcpkg (build from commit 4f746bc66)
 - Yarn 1.22.22
 
@@ -60,20 +62,20 @@ to accomplish this.
 ```
 
 ### Project Management
-- Ant 1.10.12
+- Ant 1.10.7
 - Gradle 8.10.2
 - Lerna 8.1.9
 - Maven 3.8.8
 - Sbt 1.10.4
 
 ### Tools
-- Ansible 2.17.5
+- Ansible 2.13.13
 - apt-fast 1.10.0
 - AzCopy 10.27.0 - available by `azcopy` and `azcopy10` aliases
 - Bazel 7.4.0
 - Bazelisk 1.22.1
 - Bicep 0.30.23
-- Buildah 1.23.1
+- Buildah 1.22.3
 - CMake 3.30.5
 - CodeQL Action Bundle 2.19.2
 - Docker Amazon ECR Credential Helper 0.9.0
@@ -85,35 +87,37 @@ to accomplish this.
 - Git 2.47.0
 - Git LFS 3.5.1
 - Git-ftp 1.6.0
-- Haveged 1.9.14
+- Haveged 1.9.1
 - Heroku 9.3.2
+- HHVM (HipHop VM) 4.172.1
 - jq 1.6
 - Kind 0.24.0
 - Kubectl 1.31.2
 - Kustomize 5.5.0
 - Leiningen 2.11.2
-- MediaInfo 21.09
-- Mercurial 6.1.1
+- MediaInfo 19.09
+- Mercurial 5.3.1
 - Minikube 1.34.0
 - n 10.0.0
 - Newman 6.2.1
 - nvm 0.40.1
-- OpenSSL 3.0.2-0ubuntu1.18
+- OpenSSL 1.1.1f-1ubuntu2.23
 - Packer 1.11.2
 - Parcel 2.12.0
-- Podman 3.4.4
+- PhantomJS 2.1.1 2.1.1
+- Podman 3.4.2
 - Pulumi 3.137.0
 - R 4.4.1
-- Skopeo 1.4.1
+- Skopeo 1.5.0
 - Sphinx Open Source Search Server 2.2.11
-- SVN 1.14.1
+- SVN 1.13.0
 - Terraform 1.9.8
 - yamllint 1.35.1
 - yq 4.44.3
 - zstd 1.5.6
 
 ### CLI Tools
-- Alibaba Cloud CLI 3.0.227
+- Alibaba Cloud CLI 3.0.174
 - AWS CLI 2.19.1
 - AWS CLI Session Manager Plugin 1.2.677.0
 - AWS SAM CLI 1.127.0
@@ -122,7 +126,7 @@ to accomplish this.
 - GitHub CLI 2.60.1
 - Google Cloud CLI 499.0.0
 - Netlify CLI 17.37.2
-- OpenShift CLI 4.17.3
+- OpenShift CLI 4.15.19
 - ORAS CLI 1.2.0
 - Vercel CLI 37.14.0
 
@@ -135,7 +139,7 @@ to accomplish this.
 | 21.0.5+11           | JAVA_HOME_21_X64     |
 
 ### PHP Tools
-- PHP: 8.1.2
+- PHP: 7.4.33, 8.0.30, 8.1.30, 8.2.25, 8.3.13
 - Composer 2.8.2
 - PHPUnit 8.5.40
 ```
@@ -185,7 +189,8 @@ Both Xdebug and PCOV extensions are installed, but only Xdebug is enabled.
 - nbgv 3.6.146+392592327a
 
 ### Databases
-- sqlite3 3.37.2
+- MongoDB 5.0.30
+- sqlite3 3.31.1
 
 #### PostgreSQL
 - PostgreSQL 14.13
@@ -196,7 +201,7 @@ Use the following command as a part of your job to start the service: 'sudo syst
 ```
 
 #### MySQL
-- MySQL 8.0.39-0ubuntu0.22.04.1
+- MySQL 8.0.39-0ubuntu0.20.04.1
 ```
 User: root
 Password: root
@@ -230,12 +235,15 @@ Use the following command as a part of your job to start the service: 'sudo syst
 - 3.12.7
 
 #### PyPy
+- 2.7.18 [PyPy 7.3.17]
+- 3.6.12 [PyPy 7.3.3]
 - 3.7.13 [PyPy 7.3.9]
 - 3.8.16 [PyPy 7.3.11]
 - 3.9.19 [PyPy 7.3.16]
 - 3.10.14 [PyPy 7.3.17]
 
 #### Ruby
+- 3.0.7
 - 3.1.6
 - 3.2.6
 
@@ -250,10 +258,11 @@ Use the following command as a part of your job to start the service: 'sudo syst
 - PSScriptAnalyzer: 1.23.0
 
 ### Web Servers
-| Name    | Version | ConfigFile                | ServiceStatus | ListenPort |
-| ------- | ------- | ------------------------- | ------------- | ---------- |
-| apache2 | 2.4.52  | /etc/apache2/apache2.conf | inactive      | 80         |
-| nginx   | 1.18.0  | /etc/nginx/nginx.conf     | inactive      | 80         |
+| Name      | Version | ConfigFile                | ServiceStatus | ListenPort |
+| --------- | ------- | ------------------------- | ------------- | ---------- |
+| apache2   | 2.4.41  | /etc/apache2/apache2.conf | inactive      | 80         |
+| mono-xsp4 | 4.7.1   | /etc/default/mono-xsp4    | active        | 8084       |
+| nginx     | 1.18.0  | /etc/nginx/nginx.conf     | inactive      | 80         |
 
 ### Android
 | Package Name               | Version                                                                                                                                                                                                                                                                         |
@@ -286,6 +295,7 @@ Use the following command as a part of your job to start the service: 'sudo syst
 | alpine:3.19          | sha256:ae65dbf8749a7d4527648ccee1fa3deb6bfcae34cbc30fc67aa45c44dcaa90ee  | 2024-09-06 |
 | debian:10            | sha256:58ce6f1271ae1c8a2006ff7d3e54e9874d839f573d8009c20154ad0f2fb0a225  | 2024-06-13 |
 | debian:11            | sha256:d0036be35fe0a4d2649bf074ca467a37dab8c5b26bbbdfca0375b4dc682f011d  | 2024-10-17 |
+| debian:9             | sha256:c5c5200ff1e9c73ffbf188b4a67eb1c91531b644856b4aefe86a58d2f0cb05be  | 2022-06-23 |
 | moby/buildkit:latest | sha256:8e8898b54dbaccc8e0b56e02e5d5b3d6b947a26c24b37899c5c652bba7c60b47  | 2024-10-30 |
 | node:16              | sha256:f77a1aef2da8d83e45ec990f45df50f1a286c5fe8bbfb8c6e4246c6389705c0b  | 2023-09-07 |
 | node:16-alpine       | sha256:a1f9d027912b58a7c75be7716c97cfbc6d3099f3a97ed84aa490be9dee20e787  | 2023-08-10 |
@@ -296,99 +306,96 @@ Use the following command as a part of your job to start the service: 'sudo syst
 | node:22              | sha256:de4c8be8232b7081d8846360d73ce6dbff33c6636f2259cd14d82c0de1ac3ff2  | 2024-10-29 |
 | node:22-alpine       | sha256:f265794478aa0b1a23d85a492c8311ed795bc527c3fe7e43453b3c872dcd71a3  | 2024-10-29 |
 | ubuntu:20.04         | sha256:8e5c4f0285ecbb4ead070431d29b576a530d3166df73ec44affc1cd27555141b  | 2024-10-11 |
-| ubuntu:22.04         | sha256:0e5e4a57c2499249aafc3b40fcd541e9a456aab7296681a3994d631587203f97  | 2024-09-11 |
 
 ### Installed apt packages
-| Name                   | Version                             |
-| ---------------------- | ----------------------------------- |
-| acl                    | 2.3.1-1                             |
-| aria2                  | 1.36.0-1                            |
-| autoconf               | 2.71-2                              |
-| automake               | 1:1.16.5-1.3                        |
-| binutils               | 2.38-4ubuntu2.6                     |
-| bison                  | 2:3.8.2+dfsg-1build1                |
-| brotli                 | 1.0.9-2build6                       |
-| bzip2                  | 1.0.8-5build1                       |
-| coreutils              | 8.32-4.1ubuntu1.2                   |
-| curl                   | 7.81.0-1ubuntu1.18                  |
-| dbus                   | 1.12.20-2ubuntu4.1                  |
-| dnsutils               | 1:9.18.28-0ubuntu0.22.04.1          |
-| dpkg                   | 1.21.1ubuntu2.3                     |
-| dpkg-dev               | 1.21.1ubuntu2.3                     |
-| fakeroot               | 1.28-1ubuntu1                       |
-| file                   | 1:5.41-3ubuntu0.1                   |
-| findutils              | 4.8.0-1ubuntu3                      |
-| flex                   | 2.6.4-8build2                       |
-| fonts-noto-color-emoji | 2.042-0ubuntu0.22.04.1              |
-| ftp                    | 20210827-4build1                    |
-| g++                    | 4:11.2.0-1ubuntu1                   |
-| gcc                    | 4:11.2.0-1ubuntu1                   |
-| gnupg2                 | 2.2.27-3ubuntu2.1                   |
-| haveged                | 1.9.14-1ubuntu1                     |
-| imagemagick            | 8:6.9.11.60+dfsg-1.3ubuntu0.22.04.5 |
-| iproute2               | 5.15.0-1ubuntu2                     |
-| iputils-ping           | 3:20211215-1                        |
-| jq                     | 1.6-2.1ubuntu3                      |
-| lib32z1                | 1:1.2.11.dfsg-2ubuntu9.2            |
-| libc++-dev             | 1:14.0-55\~exp2                     |
-| libc++abi-dev          | 1:14.0-55\~exp2                     |
-| libc6-dev              | 2.35-0ubuntu3.8                     |
-| libcurl4               | 7.81.0-1ubuntu1.18                  |
-| libgbm-dev             | 23.2.1-1ubuntu3.1\~22.04.2          |
-| libgconf-2-4           | 3.2.6-7ubuntu2                      |
-| libgsl-dev             | 2.7.1+dfsg-3                        |
-| libgtk-3-0             | 3.24.33-1ubuntu2.2                  |
-| libmagic-dev           | 1:5.41-3ubuntu0.1                   |
-| libmagickcore-dev      | 8:6.9.11.60+dfsg-1.3ubuntu0.22.04.5 |
-| libmagickwand-dev      | 8:6.9.11.60+dfsg-1.3ubuntu0.22.04.5 |
-| libsecret-1-dev        | 0.20.5-2                            |
-| libsqlite3-dev         | 3.37.2-2ubuntu0.3                   |
-| libssl-dev             | 3.0.2-0ubuntu1.18                   |
-| libtool                | 2.4.6-15build2                      |
-| libunwind8             | 1.3.2-2build2.1                     |
-| libxkbfile-dev         | 1:1.1.0-1build3                     |
-| libxss1                | 1:1.2.3-1build2                     |
-| libyaml-dev            | 0.2.2-1build2                       |
-| locales                | 2.35-0ubuntu3.8                     |
-| lz4                    | 1.9.3-2build2                       |
-| m4                     | 1.4.18-5ubuntu2                     |
-| make                   | 4.3-4.1build1                       |
-| mediainfo              | 22.03-1                             |
-| mercurial              | 6.1.1-1ubuntu1                      |
-| net-tools              | 1.60+git20181103.0eebece-1ubuntu5   |
-| netcat                 | 1.218-4ubuntu1                      |
-| openssh-client         | 1:8.9p1-3ubuntu0.10                 |
-| p7zip-full             | 16.02+dfsg-8                        |
-| p7zip-rar              | 16.02-3build1                       |
-| parallel               | 20210822+ds-2                       |
-| pass                   | 1.7.4-5                             |
-| patchelf               | 0.14.3-1                            |
-| pigz                   | 2.6-1                               |
-| pkg-config             | 0.29.2-1ubuntu3                     |
-| pollinate              | 4.33-3ubuntu2                       |
-| python-is-python3      | 3.9.2-2                             |
-| rpm                    | 4.17.0+dfsg1-4build1                |
-| rsync                  | 3.2.7-0ubuntu0.22.04.2              |
-| shellcheck             | 0.8.0-2                             |
-| sphinxsearch           | 2.2.11-8                            |
-| sqlite3                | 3.37.2-2ubuntu0.3                   |
-| ssh                    | 1:8.9p1-3ubuntu0.10                 |
-| sshpass                | 1.09-1                              |
-| subversion             | 1.14.1-3ubuntu0.22.04.1             |
-| sudo                   | 1.9.9-1ubuntu2.4                    |
-| swig                   | 4.0.2-1ubuntu1                      |
-| tar                    | 1.34+dfsg-1ubuntu0.1.22.04.2        |
-| telnet                 | 0.17-44build1                       |
-| texinfo                | 6.8-4build1                         |
-| time                   | 1.9-0.1build2                       |
-| tk                     | 8.6.11+1build2                      |
-| tzdata                 | 2024a-0ubuntu0.22.04.1              |
-| unzip                  | 6.0-26ubuntu3.2                     |
-| upx                    | 3.96-3                              |
-| wget                   | 1.21.2-2ubuntu1.1                   |
-| xorriso                | 1.5.4-2                             |
-| xvfb                   | 2:21.1.4-2ubuntu1.7\~22.04.12       |
-| xz-utils               | 5.2.5-2ubuntu1                      |
-| zip                    | 3.0-12build2                        |
-| zsync                  | 0.6.2-3ubuntu1                      |
+| Name                   | Version                           |
+| ---------------------- | --------------------------------- |
+| acl                    | 2.2.53-6                          |
+| aria2                  | 1.35.0-1build1                    |
+| autoconf               | 2.69-11.1                         |
+| automake               | 1:1.16.1-4ubuntu6                 |
+| binutils               | 2.34-6ubuntu1.9                   |
+| bison                  | 2:3.5.1+dfsg-1                    |
+| brotli                 | 1.0.7-6ubuntu0.1                  |
+| bzip2                  | 1.0.8-2                           |
+| coreutils              | 8.30-3ubuntu2                     |
+| curl                   | 7.68.0-1ubuntu2.24                |
+| dbus                   | 1.12.16-2ubuntu2.3                |
+| dnsutils               | 1:9.18.28-0ubuntu0.20.04.1        |
+| dpkg                   | 1.19.7ubuntu3.2                   |
+| dpkg-dev               | 1.19.7ubuntu3.2                   |
+| fakeroot               | 1.24-1                            |
+| file                   | 1:5.38-4                          |
+| findutils              | 4.7.0-1ubuntu1                    |
+| flex                   | 2.6.4-6.2                         |
+| fonts-noto-color-emoji | 0\~20200916-1\~ubuntu20.04.1      |
+| ftp                    | 0.17-34.1                         |
+| g++                    | 4:9.3.0-1ubuntu2                  |
+| gcc                    | 4:9.3.0-1ubuntu2                  |
+| gnupg2                 | 2.2.19-3ubuntu2.2                 |
+| haveged                | 1.9.1-6ubuntu1                    |
+| imagemagick            | 8:6.9.10.23+dfsg-2.1ubuntu11.10   |
+| iproute2               | 5.5.0-1ubuntu1                    |
+| iputils-ping           | 3:20190709-3ubuntu1               |
+| jq                     | 1.6-1ubuntu0.20.04.1              |
+| lib32z1                | 1:1.2.11.dfsg-2ubuntu1.5          |
+| libc++-dev             | 1:10.0-50\~exp1                   |
+| libc++abi-dev          | 1:10.0-50\~exp1                   |
+| libc6-dev              | 2.31-0ubuntu9.16                  |
+| libcurl4               | 7.68.0-1ubuntu2.24                |
+| libgbm-dev             | 21.2.6-0ubuntu0.1\~20.04.2        |
+| libgconf-2-4           | 3.2.6-6ubuntu1                    |
+| libgsl-dev             | 2.5+dfsg-6+deb10u1build0.20.04.1  |
+| libgtk-3-0             | 3.24.20-0ubuntu1.2                |
+| libmagic-dev           | 1:5.38-4                          |
+| libmagickcore-dev      | 8:6.9.10.23+dfsg-2.1ubuntu11.10   |
+| libmagickwand-dev      | 8:6.9.10.23+dfsg-2.1ubuntu11.10   |
+| libsecret-1-dev        | 0.20.4-0ubuntu1                   |
+| libsqlite3-dev         | 3.31.1-4ubuntu0.6                 |
+| libtool                | 2.4.6-14                          |
+| libunwind8             | 1.2.1-9ubuntu0.1                  |
+| libxkbfile-dev         | 1:1.1.0-1                         |
+| libxss1                | 1:1.2.3-1                         |
+| libyaml-dev            | 0.2.2-1                           |
+| locales                | 2.31-0ubuntu9.16                  |
+| m4                     | 1.4.18-4                          |
+| make                   | 4.2.1-1.2                         |
+| mediainfo              | 19.09-1build1                     |
+| mercurial              | 5.3.1-1ubuntu1                    |
+| net-tools              | 1.60+git20180626.aebd88e-1ubuntu1 |
+| netcat                 | 1.206-1ubuntu1                    |
+| openssh-client         | 1:8.2p1-4ubuntu0.11               |
+| p7zip-full             | 16.02+dfsg-7build1                |
+| p7zip-rar              | 16.02-3build1                     |
+| parallel               | 20161222-1.1                      |
+| pass                   | 1.7.3-2                           |
+| patchelf               | 0.10-2build1                      |
+| pigz                   | 2.4-1                             |
+| pkg-config             | 0.29.1-0ubuntu4                   |
+| pollinate              | 4.33-3ubuntu1.20.04.1             |
+| python-is-python3      | 3.8.2-4                           |
+| rpm                    | 4.14.2.1+dfsg1-1build2            |
+| rsync                  | 3.1.3-8ubuntu0.7                  |
+| shellcheck             | 0.7.0-2build2                     |
+| sphinxsearch           | 2.2.11-2ubuntu2                   |
+| sqlite3                | 3.31.1-4ubuntu0.6                 |
+| ssh                    | 1:8.2p1-4ubuntu0.11               |
+| sshpass                | 1.06-1                            |
+| subversion             | 1.13.0-3ubuntu0.2                 |
+| sudo                   | 1.8.31-1ubuntu1.5                 |
+| swig                   | 4.0.1-5build1                     |
+| tar                    | 1.30+dfsg-7ubuntu0.20.04.4        |
+| telnet                 | 0.17-41.2build1                   |
+| texinfo                | 6.7.0.dfsg.2-5                    |
+| time                   | 1.7-25.1build1                    |
+| tk                     | 8.6.9+1                           |
+| tzdata                 | 2024a-0ubuntu0.20.04.1            |
+| unzip                  | 6.0-25ubuntu1.2                   |
+| upx                    | 3.95-2build1                      |
+| wget                   | 1.20.3-1ubuntu2.1                 |
+| xorriso                | 1.5.2-1                           |
+| xvfb                   | 2:1.20.13-1ubuntu1\~20.04.18      |
+| xz-utils               | 5.2.4-1ubuntu1.1                  |
+| zip                    | 3.0-11build1                      |
+| zsync                  | 0.6.2-3ubuntu1                    |
 

@@ -96,3 +96,9 @@ Describe "Sudoers" {
         "sudo visudo -c" | Should -ReturnZeroExitCode
     }
 }
+
+Describe "Unxip" {
+    It "Unxip" {
+        "unxip --version" | Should -ReturnZeroExitCode
+    }
+}
